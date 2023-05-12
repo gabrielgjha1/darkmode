@@ -6,7 +6,7 @@
 - node 16 o superior
 ## Pasos
 
-1. Agrega los colores que tendrá la aplicación en modo oscuro en el archivo scss de la siguiente manera:
+1. Agrega los colores que tendrá la aplicación en modo oscuro en el archivo scss de la siguiente manera en **theme/variables.scss debajo de la linea 147**:
 ```scss
 
 /*
