@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-root',
@@ -6,10 +7,19 @@ import { Component } from '@angular/core';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor() {}
-  public checkDarkTheme(){
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
-    console.log(prefersDark);
+  constructor(public platform: Platform) {
+    this.initializaApp();
   }
+
+  public initializaApp(){
+    this.platform.ready().then(()=>{
+      this.checkDarkTheme();
+    })
+  }
+
+  public checkDarkTheme(){
+
+  }
+  
 }
 
