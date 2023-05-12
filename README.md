@@ -1,22 +1,12 @@
-# Título
+# Implementacion del darkMode en ionic
 
-## Subtítulo
+## Requisitos
 
-### Subtítulo 2
-
-Texto normal
-
-- Lista 1
-- Lista 2
-- Lista 3
-
-1. Lista numerada 1
-2. Lista numerada 2
-3. Lista numerada 3
-
+- IONIC
+- node 16 o superior
 ## Pasos
 
-1. En este paso vamos a añadir los colores que va a tener la aplicacion en modo oscuro.
+1. Agrega los colores que tendrá la aplicación en modo oscuro en el archivo scss de la siguiente manera:
 ```scss
 
 /*
@@ -177,7 +167,7 @@ body.dark {
   --ion-card-background: #1e1e1e;
 }
 ```
-2. Para probar el cambio de colores si esta funcionando el modo oscuro ir a index.html y agregar la clase dark en el body (Si no se actualiza automaticamente cambiar algo del codigo en variables scss o app.component).
+2. Para verificar que el modo oscuro está funcionando correctamente, agrega la clase dark en el body del archivo index.html. Si no se actualiza automáticamente, cambia algo del código en las variables scss o en el app.component.
 
 ```html
 <body class="dark">
@@ -185,8 +175,64 @@ body.dark {
 </body>
 ```
 
-3. Para .
+3. Una vez que se haya comprobado que la aplicación se pone en modo oscuro de manera manual, elimina la clase dark en el index.html y asegúrate de que quede en modo light.
+```html
+<body>
+  <app-root></app-root>
+</body>
+```
+4. Ahora vamos a Identificar y activar el modo oscuro o light si lo tiene configurado en su sistema. El código a continuación se agrega en **app.component**:
 
-**Negrita**
-*Cursiva*
-***Negrita y cursiva***
+Este código identifica si nuestro sistema está en modo oscuro y, en caso afirmativo, agrega la clase dark al body, lo que hace que la aplicación esté en modo oscuro. Es necesario actualizar la página.
+```Typescript
+  public checkDarkTheme(){
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    if(prefersDark.matches){
+      document.body.classList.toggle('dark');
+    }
+  }
+```
+5. Ahora vamos Activar el modo oscuro de forma manual. Para ello, agrega la siguiente variable en **tab1.page.ts**:
+
+Esta variable se utilizará para identificar si el modo oscuro está activado o desactivado y poder dejar el toggle encendido o apagado.
+```Typescript
+public darkMode = true;
+```
+
+6. Agrega el método que cambiará entre el modo oscuro y light con el toggle.. 
+
+Con **this.darkMode = !this.darkMode;** se coloca el toggle en **true** o **false** y con **document.body.classList.toggle( 'dark' );** se cambia el cuerpo entre light y dark.
+```Typescript
+  changeDarkMode() {
+    this.darkMode = !this.darkMode;
+    document.body.classList.toggle( 'dark' );    
+  }
+```
+
+7. Agrega el siguiente código en el HTML de tab1.page.html para incluir el toggle que ejecutará los métodos que creamos, debajo del **ion-content:**
+
+Este codigo tomara la variable creada anterior mente y ejectua el metodo changeDarkMode cada vez que el toggle cambie.
+```html
+  <ion-list>
+    <ion-item>
+      <ion-icon slot="start" name="moon"></ion-icon>
+      <ion-label>Toggle Dark Theme</ion-label>
+      <ion-toggle
+        slot="end"
+        [ngModel]="darkMode"
+        (ionChange)="changeDarkMode()"
+      ></ion-toggle>
+    </ion-item>
+  </ion-list>
+```
+
+8. Ahora se agrega el siguiente codigo en el contructor del **tab1.page.ts**.
+
+Este codigo almacena en la variable darkMode si el sistema tiene el modo oscuro activado o no, y deja el toggle en true si lo esta y si no en falso.
+```Typescript
+  constructor() {
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    this.darkMode = prefersDark.matches;
+  }
+```
+9. añadir algun componente en el tab3.page.html y ver el cambio entre light y dark
