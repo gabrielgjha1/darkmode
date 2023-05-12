@@ -1,17 +1,10 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Episodios
-    </ion-title>
+    <ion-title> Episodios </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
   <ion-spinner *ngIf="isLoading"></ion-spinner>
   <section *ngIf="!isLoading">
     <ion-card>
@@ -27,7 +20,6 @@
           </ion-item>
         </ion-list>
       </ion-card-content>
-      
     </ion-card>
   </section>
 </ion-content>
