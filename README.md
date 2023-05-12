@@ -183,7 +183,7 @@ body.dark {
 ```
 4. Ahora vamos a Identificar y activar el modo oscuro o light si lo tiene configurado en su sistema. El código a continuación se agrega en **app.component**:
 
-Este código identifica si nuestro sistema está en modo oscuro y, en caso afirmativo, agrega la clase dark al body, lo que hace que la aplicación esté en modo oscuro. Es necesario actualizar la página.
+Este código identifica si nuestro sistema está en modo oscuro y, en caso afirmativo, agrega la clase dark al body, lo que hace que la aplicación esté en modo oscuro. podemos ir a **preferencias del sistema y cambiar entre modo oscuro y light** y actualizar la pagina para **ver el cambio**
 ```Typescript
   public checkDarkTheme(){
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
